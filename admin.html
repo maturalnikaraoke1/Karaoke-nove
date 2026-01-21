@@ -2,30 +2,20 @@
 <html lang="hr">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Karaoke</title>
+    <title>Admin - Karaoke</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-    <h1>Admin panel 🎤</h1>
-    <p id="now">Sada pjeva: —</p>
-    <p id="next">Sljedeći: —</p>
+    <h1>🎛 Admin panel</h1>
+
+    <ul id="playlist"></ul>
+
+    <button id="next">▶ Pusti sljedeću</button>
+    <button onclick="window.open('public.html','_blank')">📺 Prikaz za publiku</button>
 </div>
 
-<div id="video-container">
-    <iframe id="yt" allow="autoplay"></iframe>
-</div>
-
-<button id="fsBtn">Fullscreen</button>
-
-<script src="public.js"></script>
-<script>
-    document.getElementById("fsBtn").addEventListener("click", () => {
-        document.documentElement.requestFullscreen();
-    });
-</script>
+<script src="admin.js"></script>
 </body>
 </html>
- 
-
