@@ -35,3 +35,4 @@ async function load() {
 
 // ⏱ može ostati, ali više NE RESTARTUJE PJESMU
 setInterval(load, 3000);
+
