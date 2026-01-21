@@ -1,19 +1,20 @@
-const ul = document.getElementById("playlist");
+const API_KEY = "AIzaSyBMNIx8X3XmR_gMrTIrX-0NL5NQSDEPDKU";
 
-function render() {
+function renderPlaylist() {
     const list = JSON.parse(localStorage.getItem("playlist")) || [];
+    const ul = document.getElementById("playlist");
     ul.innerHTML = "";
 
-    list.forEach((p, i) => {
+    list.forEach((item, index) => {
         const li = document.createElement("li");
-        li.textContent = `${i+1}. Stol ${p.table} – ${p.song}`;
+        li.textContent = `Stol ${item.table} – ${item.song} `;
 
         const del = document.createElement("button");
-        del.textContent = "❌";
+        del.textContent = "Obriši";
         del.onclick = () => {
-            list.splice(i, 1);
+            list.splice(index, 1);
             localStorage.setItem("playlist", JSON.stringify(list));
-            render();
+            renderPlaylist();
         };
 
         li.appendChild(del);
@@ -21,14 +22,34 @@ function render() {
     });
 }
 
-document.getElementById("next").onclick = () => {
+function loadCurrent() {
+    const current = JSON.parse(localStorage.getItem("current"));
     const list = JSON.parse(localStorage.getItem("playlist")) || [];
+
+    document.getElementById("now").textContent =
+        current ? `🎤 Sada pjeva: Stol ${current.table} – ${current.song}` : "🎤 Sada pjeva: —";
+
+    document.getElementById("next").textContent =
+        list[0] ? `➡️ Sljedeći: Stol ${list[0].table} – ${list[0].song}` : "➡️ Sljedeći: —";
+}
+
+document.getElementById("nextBtn").onclick = () => {
+    const list = JSON.parse(localStorage.getItem("playlist")) || [];
+
     if (list.length === 0) return;
 
-    const current = list.shift();
-    localStorage.setItem("current", JSON.stringify(current));
+    const next = list.shift();
+    localStorage.setItem("current", JSON.stringify(next));
     localStorage.setItem("playlist", JSON.stringify(list));
-    render();
+
+    loadCurrent();
+    renderPlaylist();
 };
 
-render();
+document.getElementById("publicBtn").onclick = () => {
+    window.open("public.html", "_blank");
+};
+
+renderPlaylist();
+loadCurrent();
+
