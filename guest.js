@@ -23,3 +23,4 @@ document.getElementById("adminLogin").onclick = () => {
         alert("Pogrešna lozinka");
     }
 };
+
